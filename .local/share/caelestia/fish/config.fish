@@ -81,3 +81,5 @@ end
 
 # Created by `pipx` on 2026-03-25 21:45:40
 set PATH $PATH /home/santiago/.local/bin
+source ~/.venvs/p39/bin/activate.fish
+set -x QT_QPA_PLATFORM xcb
