@@ -5,7 +5,7 @@
 ------------------------------------------------------------
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
-
+vim.env.COLORTERM = "truecolor"
 vim.opt.number         = true
 vim.opt.relativenumber = true
 vim.opt.termguicolors  = true

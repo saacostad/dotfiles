@@ -1,6 +1,4 @@
 if status is-interactive
-    # Starship custom prompt
-    starship init fish | source
 
     # Direnv + Zoxide
     command -v direnv &> /dev/null && direnv hook fish | source
@@ -8,7 +6,6 @@ if status is-interactive
 
     # Better ls
     alias ls='eza --icons --group-directories-first -1'
-    # Add to ~/.config/fish/config.fish
     alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 
     # Abbrs
@@ -33,10 +30,6 @@ if status is-interactive
     abbr ll 'ls -l'
     abbr la 'ls -a'
     abbr lla 'ls -la'
-    
-
-
-
 
     # Custom colours
     cat ~/.local/state/caelestia/sequences.txt 2> /dev/null
@@ -45,41 +38,63 @@ if status is-interactive
     function mark_prompt_start --on-event fish_prompt
         echo -en "\e]133;A\e\\"
     end
-    
-    # Custom fish config
-    # source ~/.config/caelestia/user-config.fish 2> /dev/null
 
-	function ranger
-	    set tempfile (mktemp -t ranger_cd.XXXXXX)
-	    command ranger --choosedir=$tempfile $argv
-	    if test -f $tempfile
-		set dir (cat $tempfile)
-		if test -d "$dir"
-		    cd "$dir"
-		end
-	    end
-	    rm -f $tempfile
+    # Ranger with cd on exit
+    function ranger
+        set tempfile (mktemp -t ranger_cd.XXXXXX)
+        command ranger --choosedir=$tempfile $argv
+        if test -f $tempfile
+            set dir (cat $tempfile)
+            if test -d "$dir"
+                cd "$dir"
+            end
+        end
+        rm -f $tempfile
+        tput sgr0
+        commandline -f repaint
+    end
 
-	    tput sgr0
-	    commandline -f repaint
-	end
-    
+    # Nvim with cd on exit
     function nvim
-        command nvim $argv
-	source ~/.config/fish/config.fish
+        set tempfile (mktemp -t nvim_cd.XXXXXX)
+        command nvim --cmd "autocmd VimLeave * call writefile([getcwd()], '$tempfile')" $argv
+        if test -f $tempfile
+            set dir (cat $tempfile)
+            if test -d "$dir"
+                cd "$dir"
+            end
+        end
+        rm -f $tempfile
+        tput sgr0
+        commandline -f repaint
     end
 
     function r
-      ranger $argv
+        ranger $argv
     end
+
+    # Python venv (skip inside nvim terminal to avoid prompt error)
+    if test -e ~/.venvs/p39/bin/activate.fish; and not set -q NVIM
+        source ~/.venvs/p39/bin/activate.fish
+    end
+
+    # Fix colors inside nvim terminal
+    if set -q NVIM
+        set -gx TERM xterm-256color
+        set -gx COLORTERM truecolor
+    end
+
+    # Starship prompt (MUST be last)
+    starship init fish | source
 end
 
-# Add to ~/.config/fish/config.fish
+# SSH agent (runs in all shells, not just interactive)
 if not set -q SSH_AGENT_PID
     eval (ssh-agent -c) > /dev/null
 end
 
-# Created by `pipx` on 2026-03-25 21:45:40
-set PATH $PATH /home/santiago/.local/bin
-source ~/.venvs/p39/bin/activate.fish
-set -x QT_QPA_PLATFORM xcb
+# PATH
+set -gx PATH $PATH /home/santiago/.local/bin
+
+# Qt platform
+set -gx QT_QPA_PLATFORM xcb
