@@ -1,19 +1,25 @@
--- ~/.config/nvim/lua/plugins/colorscheme.lua
-
 return {
   {
-    "sainnhe/gruvbox-material",
+    "catppuccin/nvim",
+    name = "catppuccin",
     priority = 1000,
     config = function()
-      vim.g.gruvbox_material_background          = "soft"    -- "hard", "medium", "soft"
-      vim.g.gruvbox_material_foreground           = "material" -- "material", "mix", "original"
-      vim.g.gruvbox_material_transparent_background = 2       -- 0=off, 1=basic, 2=full
-      vim.g.gruvbox_material_disable_italic_comment = 0
-      vim.g.gruvbox_material_better_performance     = 1
+      require("catppuccin").setup({
+        flavour = "mocha", -- Options: latte, frappe, macchiato, mocha
+        transparent_background = false, -- Enable Catppuccin's native transparency
+        integrations = {
+          nvimtree = true,
+	  window_picker = true,
+	  telescope = true,
+	  bufferline = true
+          -- you can enable other integrations here (telescope, which_key, etc.)
+        },
+      })
 
-      vim.cmd.colorscheme("gruvbox-material")
+      -- Load the colorscheme
+      vim.cmd.colorscheme("catppuccin")
 
-      -- nuke ALL backgrounds for full transparency
+      -- Nuke ALL backgrounds for full transparency (keeping your exact logic)
       local groups = {
         "Normal",
         "NormalNC",
@@ -58,16 +64,16 @@ return {
         "BufferLineOffsetSeparator",
       }
 
-      for _, group in ipairs(groups) do
-        local ok, current = pcall(vim.api.nvim_get_hl, 0, { name = group, link = false })
-        if ok then
-          current.bg = nil
-          current.ctermbg = nil
-          vim.api.nvim_set_hl(0, group, current)
-        else
-          vim.api.nvim_set_hl(0, group, { bg = "NONE" })
-        end
-      end
+      -- for _, group in ipairs(groups) do
+      --   local ok, current = pcall(vim.api.nvim_get_hl, 0, { name = group, link = false })
+      --   if ok then
+      --     current.bg = nil
+      --     current.ctermbg = nil
+      --     vim.api.nvim_set_hl(0, group, current)
+      --   else
+      --     vim.api.nvim_set_hl(0, group, { bg = "NONE" })
+      --   end
+      -- end
     end,
   },
 }
