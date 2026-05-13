@@ -9,30 +9,69 @@ return {
       vim.g.loaded_netrwPlugin = 1
 
       require("nvim-tree").setup({
-        view = {
-          width = 30,
-          side = "left",
-        },
-        renderer = {
+	renderer = {
+          root_folder_label = true, 
           highlight_git = true,
+          indent_markers = {
+            enable = true, -- Adds vertical lines to show nesting
+            icons = {
+              corner = "└",
+              edge = "│",
+              item = "│",
+              bottom = "─",
+              none = " ",
+            },
+          },
           icons = {
-            show = { file = true, folder = true, folder_arrow = true, git = true },
+            show = {
+              file = true,
+              folder = true,
+              folder_arrow = false, -- Cleaner look without arrows
+              git = true,
+            },
+            glyphs = {
+              folder = {
+                arrow_closed = "󰅂", -- Arrow icon if you keep them
+                arrow_open = "󰅀",
+                default = "󰉋",
+                open = "󱁉",
+                empty = "󰒺",
+                empty_open = "󰒺",
+                symlink = "󰉿",
+                symlink_open = "󰉿",
+              },
+              git = {
+                unstaged = "✗",
+                staged = "✓",
+                unmerged = "",
+                renamed = "➜",
+                untracked = "★",
+                deleted = "",
+                ignored = "◌",
+              },
+            },
           },
         },
-        filters = { dotfiles = false },
-        git     = { enable = true, ignore = false },
-      })
+        view = {
+          width = 35,
+          side = "left",
+          -- Removes line numbers for a cleaner look
+          number = false,
+          relativenumber = false,
+        },
+        -- Flattens empty folders (e.g., java/com/google becomes one line)
+        renderer = {
+            group_empty = true,
+        },
+        filters = {
+          dotfiles = false,
+          custom = { ".DS_Store" }, -- Hide annoying system files
+        },
+        git = {
+          enable = true,
+          ignore = false,
+        },
 
-      -- force nvim-tree to inherit transparency after it loads
-      vim.api.nvim_create_autocmd("FileType", {
-        pattern = "NvimTree",
-        callback = function()
-          vim.api.nvim_set_hl(0, "NvimTreeNormal",       { bg = "NONE" })
-          vim.api.nvim_set_hl(0, "NvimTreeNormalNC",      { bg = "NONE" })
-          vim.api.nvim_set_hl(0, "NvimTreeEndOfBuffer",   { bg = "NONE" })
-          vim.api.nvim_set_hl(0, "NvimTreeWinSeparator",  { bg = "NONE", fg = "#504945" })
-          vim.api.nvim_set_hl(0, "NvimTreeCursorLine",    { bg = "#3c3836" }) -- subtle line highlight
-        end,
       })
 
       vim.keymap.set("n", "<S-Tab>", "<cmd>NvimTreeToggle<cr>", { desc = "Toggle file tree" })
