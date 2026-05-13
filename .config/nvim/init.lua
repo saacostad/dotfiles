@@ -43,11 +43,17 @@ vim.opt.rtp:prepend(lazypath)
 -- LOAD PLUGINS (each file in lua/plugins/ is auto-loaded)
 ------------------------------------------------------------
 require("lazy").setup("plugins")
+local builtin = require('telescope.builtin')
+vim.keymap.set('n', '<C-p>', builtin.find_files, { desc = 'Telescope find files' })
+vim.keymap.set('n', '<C-f>', builtin.live_grep, { desc = 'Telescope live grep' })
+
 
 ------------------------------------------------------------
 -- KEYMAPS (Ctrl+a prefix, tmux-style)
 ------------------------------------------------------------
 local map = vim.keymap.set
+
+
 
 -- Ctrl+a then o/p → cycle buffer tabs
 map("n", "<C-a>o", "<cmd>BufferLineCyclePrev<cr>", { desc = "Previous buffer tab" })
@@ -69,3 +75,17 @@ map("n", "<C-a><Right>", "<C-w>l", { desc = "Move to right split" })
 
 -- Ctrl+a then c → close current split
 map("n", "<C-a>c", "<cmd>close<cr>", { desc = "Close current split" })
+
+
+-- -- Other keymaps to make my like easi er
+local keymap = vim.api.nvim_set_keymap
+local default_opts = { noremap = true, silent = true }
+local expr_opts = { noremap = true, expr = true, silent = true }
+
+-- Better escape using jk in insert and terminal mode
+keymap("i", "jk", "<ESC>", default_opts)
+keymap("t", "jk", "<C-\\><C-n>", default_opts)
+keymap("v", "p", '"_dP', default_opts)
+keymap("n", "<ESC>", ":nohlsearch<Bar>:echo<CR>", default_opts)
+keymap("x", "K", ":move '<-2<CR>gv-gv", default_opts)
+keymap("x", "J", ":move '>+1<CR>gv-gv", default_opts)
