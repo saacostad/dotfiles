@@ -7,9 +7,9 @@ return {
     config = function()
       require("toggleterm").setup({
         open_mapping    = [[<C-\>]],
-        direction       = "horizontal",
-        size            = 15,
-        shade_terminals = false,
+        direction       = "vertical",
+        size            = 80,
+        shade_terminals = true,
         shell           = "/usr/bin/fish",
 
         -- auto-enter insert mode when opening/switching to terminal
