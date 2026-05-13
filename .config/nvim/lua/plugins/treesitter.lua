@@ -1,6 +1,5 @@
 -- ~/.config/nvim/lua/plugins/treesitter.lua
 
-
 return {
   {
     "nvim-treesitter/nvim-treesitter",
@@ -10,6 +9,7 @@ return {
         ensure_installed = {
           "lua", "python", "c", "cpp", "javascript",
           "typescript", "bash", "html", "css", "json", "markdown",
+	  "bash", "fish"
         },
       })
     end,
