@@ -69,8 +69,29 @@ if status is-interactive
       ranger $argv
     end
 
-    source ~/.venvs/p39/bin/activate.fish
+    function freeram
+	    command sudo sync && sudo sh -c 'echo 3 > /proc/sys/vm/drop_caches'
+    end
+	
+    function rf
+	    command gammastep -O 4500 & 
+	end
+
+	# Default env the first time fish starts
+	if not set -q ACTIVE_PY_ENV
+	    set -U ACTIVE_PY_ENV p39
+	end
+
+	# Auto-activate shared env
+	if test -f ~/.venvs/$ACTIVE_PY_ENV/bin/activate.fish
+	    source ~/.venvs/$ACTIVE_PY_ENV/bin/activate.fish
+	end
 end
 
 # Created by `pipx` on 2026-03-25 21:45:40
 set PATH $PATH /home/santiago/.local/bin
+
+
+# Esto es para PLUTO, pero no creo necesitarlo en la laptop
+# set -x PLUTO_DIR /home/santiago/Documents/PLUTO
+# set -x gPLUTO_DIR /home/santiago/Documents/gPLUTO
