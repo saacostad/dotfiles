@@ -22,7 +22,8 @@ return {
           "pyright",
           "clangd",
           "bashls",
-	  "textlsp"
+	  	  "textlsp",
+		  "texlab"
         },
       })
     end 
