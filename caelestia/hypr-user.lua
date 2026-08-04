@@ -35,3 +35,14 @@ hl.bind(vars.kbFocusMonitorNext, hl.dsp.focus({ monitor = "DP-1" }))					-- Move
 hl.bind(vars.kbFocusMonitorPrev, hl.dsp.focus({ monitor = "HDMI-A-1" }))
 hl.bind(vars.kbMoveWinToMonNext, hl.dsp.window.move({ monitor = "DP-1", follow = true }))
 hl.bind(vars.kbMoveWinToMonPrev, hl.dsp.window.move({ monitor = "HDMI-A-1", follow = true }))
+
+
+
+
+
+
+-- --------------
+-- AUTO STARTS
+hl.on("hyprland.start", function()
+	hl.exec_cmd("safeeyes")
+end)
