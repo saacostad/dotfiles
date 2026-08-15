@@ -38,6 +38,16 @@ hl.bind(vars.kbMoveWinToMonPrev, hl.dsp.window.move({ monitor = "HDMI-A-1", foll
 
 
 
+-- ----------------
+-- Keyboard config
+
+hl.config({
+    input = {
+        kb_layout = "us",
+        kb_variant = "intl",
+    },
+})
+
 
 
 

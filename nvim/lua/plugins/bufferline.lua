@@ -70,7 +70,7 @@ return {
       -- Keymaps (Kept simple)
       local map = vim.keymap.set
       map("n", "<Tab>", "<cmd>BufferLineCycleNext<cr>", { desc = "Next buffer" })
-      map("n", "<C-Tab>", "<cmd>BufferLineCyclePrev<cr>", { desc = "Prev buffer" })
+      map("n", "<A-Tab>", "<cmd>BufferLineCyclePrev<cr>", { desc = "Prev buffer" })
       map("n", "<leader>bc", "<cmd>bdelete<cr>", { desc = "Close buffer" })
     end,
   },

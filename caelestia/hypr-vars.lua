@@ -87,4 +87,12 @@ return{
 	kbClipboardPasteLatest     = "CTRL + SHIFT + ALT + V",
 	kbEmoji                    = "SUPER + Period",
 
+	-- Window Group
+	kbWindowCycleNext          = "CTRL + TAB",
+	kbWindowCyclePrev          = "SHIFT + CTRL + TAB",
+	kbWindowGroupCycleNext     = "CTRL + ALT + TAB",
+	kbWindowGroupCyclePrev     = "CTRL + SHIFT + ALT + TAB",
+	kbUngroup                  = "SUPER + U",
+	kbToggleGroup              = "SUPER + Comma",
+	kbGroupLockActive          = "SUPER + SHIFT + Comma",
 }
