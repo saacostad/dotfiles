@@ -1,0 +1,22 @@
+[opener]
+play = [
+  { run = 'mpv %s', orphan = true, desc = "Play with mpv" }
+]
+
+edit = [
+  { run = 'nvim %s', block = true, desc = "nvim" }
+]
+
+pdf = [
+  { run = 'zathura %s', orphan = true, desc = "Open with zathura" }
+]
+
+[open]
+rules = [
+  { mime = "image/*", use = ["play", "reveal"] },
+  { mime = "video/*", use = ["play", "reveal"] },
+  { mime = "application/pdf", use = ["pdf", "reveal"] },
+  { mime = "text/*", use = ["edit", "reveal"] },
+  { mime = "application/json", use = ["edit", "reveal"] },
+  { mime = "application/x-toml", use = ["edit", "reveal"] },
+]
