@@ -1,0 +1,22 @@
+[plugin]
+deps = []
+
+[[flavor.deps]]
+use = "yazi-rs/flavors:catppuccin-mocha"
+rev = "20b47bf"
+hash = "ce320f877fe709b189433941aba747c4"
+
+[[flavor.deps]]
+use = "malick-tammal/monokai"
+rev = "57be034"
+hash = "9fbb5104646853a933446746b88118a6"
+
+[[flavor.deps]]
+use = "rapidrabbit76/claude-inspired"
+rev = "6646a90"
+hash = "880312879b18b91e4a356f6a359e108a"
+
+[[flavor.deps]]
+use = "ficd0/ashen:ashen"
+rev = "2da901f"
+hash = "ba991622420e9e408b77f73c5815d066"

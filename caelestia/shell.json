@@ -1,0 +1,46 @@
+{
+    "appearance": {
+        "transparency": {
+            "enabled": false
+        }
+    },
+    "bar": {
+        "activeWindow": {
+            "compact": true,
+            "inverted": true
+        },
+        "persistent": true,
+        "status": {
+            "showAudio": true,
+            "showBattery": false,
+            "showBluetooth": false,
+            "showLockStatus": true,
+            "showMicrophone": true,
+            "showNetwork": true,
+            "showWifi": false
+        },
+        "tray": {
+            "background": false,
+            "compact": false,
+            "recolour": false
+        },
+        "workspaces": {
+            "perMonitorWorkspaces": true,
+            "shown": 3
+        }
+    },
+    "dashboard": {
+        "performance": {
+            "showBattery": false
+        },
+        "showMedia": false,
+        "showWeather": false
+    },
+    "general": {
+        "apps": {
+            "terminal": [
+                "kitty"
+            ]
+        }
+    }
+}
